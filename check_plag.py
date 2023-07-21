@@ -3,8 +3,7 @@
 Created on Sun Jul 16 20:22:48 2023
 
 Project Name : Plagiarism Detector in Python using Machine Learning Techniques
-Author : Ms. Debalina Dasgupta
-         UEMK
+Author : Ms. Debalina Dasgupta, UEM, Kolkata
 
 Program Description :
 ---------------------
@@ -67,19 +66,21 @@ def disp_bar(data):
 #---------- Function for comparing documents
 def compare_docs():
     global doc_vectors
-    table_scores = set()
+    #table_scores = set()
+    table_scores = []
     vec_len = len(doc_vectors)
     for index1 in range(vec_len-1):
         doc_1 = doc_vectors[index1][0]
         vector_1 = doc_vectors[index1][1]
-        print(str(index1+1)+' Compairing the document in the file '+doc_1+' .....')
+        print(str(index1+1)+' Compairing the document file '+doc_1+' with rest of the files .....')
         for index2 in range(index1+1,vec_len):
             doc_2 = doc_vectors[index2][0]
             vector_2 = doc_vectors[index2][1]
             score = cosine_similarity([vector_1, vector_2])
             doc_pair_score = (doc_1, doc_2, 100*score[0][1])
             #print(doc_pair_score)
-            table_scores.add(doc_pair_score)
+            #table_scores.add(doc_pair_score)
+            table_scores.append(doc_pair_score)
     return table_scores
 
 #---------- Find the files having names Text_?.txt from the folder, named as 
