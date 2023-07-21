@@ -3,7 +3,8 @@
 Created on Sun Jul 16 20:22:48 2023
 
 Project Name : Plagiarism Detector in Python using Machine Learning Techniques
-Author : Ms. Debalina Dasgupta, UEM, Kolkata
+Author : Ms. Debalina Dasgupta
+         UEMK
 
 Program Description :
 ---------------------
