@@ -69,7 +69,7 @@ def compare_docs():
     global doc_vectors
     table_scores = set()
     vec_len = len(doc_vectors)
-    for index1 in range(vec_len):
+    for index1 in range(vec_len-1):
         doc_1 = doc_vectors[index1][0]
         vector_1 = doc_vectors[index1][1]
         print(str(index1+1)+' Compairing the document in the file '+doc_1+' .....')
