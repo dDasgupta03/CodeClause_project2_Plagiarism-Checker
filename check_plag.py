@@ -3,8 +3,7 @@
 Created on Sun Jul 16 20:22:48 2023
 
 Project Name : Plagiarism Detector in Python using Machine Learning Techniques
-Author : Ms. Debalina Dasgupta
-         UEMK
+Author : Ms. Debalina Dasgupta, UEM, Kolkata
 
 Program Description :
 ---------------------
@@ -67,28 +66,31 @@ def disp_bar(data):
 #---------- Function for comparing documents
 def compare_docs():
     global doc_vectors
-    tableScores = set()
-    for doc_1, vector_1 in doc_vectors:
-        list_vectors = doc_vectors.copy()
-        index = list_vectors.index((doc_1, vector_1))
-        print(str(index+1)+' Compairing the document in the file '+doc_1+' .....')
-        del list_vectors[index]
-        for doc_2, vector_2 in list_vectors:
+    table_scores = set()
+    vec_len = len(doc_vectors)
+    for index1 in range(vec_len):
+        doc_1 = doc_vectors[index1][0]
+        vector_1 = doc_vectors[index1][1]
+        print(str(index1+1)+' Compairing the document in the file '+doc_1+' .....')
+        for index2 in range(index1+1,vec_len):
+            doc_2 = doc_vectors[index2][0]
+            vector_2 = doc_vectors[index2][1]
             score = cosine_similarity([vector_1, vector_2])
-            doc_pair = sorted((doc_1, doc_2))
-            doc_pair_score = (doc_pair[0], doc_pair[1], 100*score[0][1])
-            tableScores.add(doc_pair_score)
-    return tableScores
+            doc_pair_score = (doc_1, doc_2, 100*score[0][1])
+            #print(doc_pair_score)
+            table_scores.add(doc_pair_score)
+    return table_scores
 
 #---------- Find the files having names Text_?.txt from the folder, named as 
 #---------- Docs, under the current working directory and create the list of files.
 
 list_files = [f for f in os.listdir('.\\Docs') if re.search("^Text_[0-9].txt",f)]
+list_files.sort()
 print('List of files found in the Docs folder under the current working directory .....')
 print(list_files)
 
 #---------- Load the documents from the text files.
-list_docs = [open('.\\Docs\\'+f, encoding='utf-8').read()
+list_docs = [open('.\\'+f, encoding='utf-8').read()
                  for f in list_files]
 
 #---------- Create the model of word vectors (document-term matrix) using 
@@ -116,4 +118,4 @@ for data in result:
     print('\t {:11}  vs.  {:11} \t\t\t {:8.5} %'.format(data[0], data[1], data[2]))
 
 #---------- Draw the Bar Graph against the result.
-disp_bar(data)
+disp_bar(result)
